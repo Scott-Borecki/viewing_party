@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def show
-    require "pry"; binding.pry
-
+    @user = User.find(session[:user_id])
   end
 
   def new
@@ -11,12 +10,11 @@ class UsersController < ApplicationController
   def create
     user = user_params
     user[:email] = user[:email].downcase
-    new_user = User.new(user)
+    new_user = User.create(user)
     if new_user.save
-      flash[:success] = "Welcome, #{new_user.email}!"
-      require "pry"; binding.pry
       session[:user_id] = new_user.id
-      redirect_to '/dashboard'
+      flash[:success] = "Welcome, #{new_user.email}!"
+      redirect_to dashboard_path
     else
       flash[:failure] = "Something went horribly wrong!"
       render :new
@@ -24,6 +22,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
