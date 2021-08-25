@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome, #{new_user.email}!"
       redirect_to dashboard_path
     else
-      flash[:failure] = "Something went horribly wrong!"
+      flash[:failure] = 'Something went horribly wrong!'
       render :new
     end
   end
