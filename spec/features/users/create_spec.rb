@@ -10,23 +10,26 @@ require 'rails_helper'
 # Details: Implement basic auth in the application allowing a user to log in with an email and password. The password should be stored in the database using bcrypt.
 
 RSpec.describe "User registration form" do
-  xit "creates new user" do
+  it "creates new user" do
     visit root_path
+
+    registration_link = 'Register as a User'
 
     click_on registration_link
 
-    expect(page).to have_current_path(new_user_path)
+    expect(page).to have_current_path('/registration')
 
     email = "funbucket13"
     password = "test"
     submit = 'Register'
 
-    fill_in :email, with: email
-    fill_in :password, with: password
-    fill_in :password_confirmation, with: password
+    fill_in "user[email]", with: email
+    fill_in "user[password]", with: password
+    fill_in "user[password_confirmation]", with: password
 
     click_on submit
 
-    expect(page).to have_content("Welcome, #{username}!")
+    expect(page).to have_current_path('/dashboard')
+    expect(page).to have_content("Welcome, #{email}!")
   end
 end
