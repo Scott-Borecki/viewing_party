@@ -27,4 +27,64 @@ RSpec.describe 'welcome index page' do
     expect(page).to have_current_path('/dashboard')
     expect(page).to have_content("Welcome, #{user.email}!")
   end
+
+  it 'returns flash message upon invalid login, no email' do
+    user = User.create(email: 'funbucket13', password: 'test')
+
+    fill_in :password, with: user.password
+
+    click_on button_text
+
+    expect(page).to have_current_path(root_path)
+    expect(page).to_not have_content("Welcome, #{user.email}!")
+
+    within '#failure' do
+      expect(page).to have_content('Something went horribly wrong!')
+    end
+  end
+
+  it 'returns flash message upon invalid login, no password' do
+    user = User.create(email: 'funbucket13', password: 'test')
+
+    fill_in :email, with: user.email
+
+    click_on button_text
+
+    expect(page).to have_current_path(root_path)
+    expect(page).to_not have_content("Welcome, #{user.email}!")
+
+    within '#failure' do
+      expect(page).to have_content('Something went horribly wrong!')
+    end
+  end
+
+  it 'returns flash message upon invalid login, wrong password' do
+    user = User.create(email: 'funbucket13', password: 'test')
+
+    fill_in :email, with: user.email
+    fill_in :password, with: "#{user.password}!"
+
+    click_on button_text
+
+    expect(page).to have_current_path(root_path)
+    expect(page).to_not have_content("Welcome, #{user.email}!")
+
+    within '#failure' do
+      expect(page).to have_content('Something went horribly wrong!')
+    end
+  end
+
+  it 'returns flash message upon invalid login, user doesnt exist' do
+    fill_in :email, with: 'funbucket13'
+    fill_in :password, with: 'test'
+
+    click_on button_text
+
+    expect(page).to have_current_path(root_path)
+    expect(page).to_not have_content("Welcome, funbucket13!")
+
+    within '#failure' do
+      expect(page).to have_content('Something went horribly wrong!')
+    end
+  end
 end
