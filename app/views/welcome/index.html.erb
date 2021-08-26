@@ -6,6 +6,14 @@
   </b>
 </p>
 
-<%= button_to 'Log In', '#' %>
+<%= form_with url: login_path, method: :post, local: true do |form| %>
+  <%= form.label :email, 'Email:' %>
+  <%= form.text_field :email %>
 
-<%= link_to 'Register as a User', '#' %>
+  <%= form.label :password, 'Password:' %>
+  <%= form.password_field :password %>
+
+  <%= form.submit 'Log In' %>
+<% end %>
+
+<%= link_to 'Register as a User', '/registration' %>
