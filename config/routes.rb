@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'users#show'
 
   post '/login', to: 'sessions#create'
+
+  get '/discover', to: 'movies#index'
 end
