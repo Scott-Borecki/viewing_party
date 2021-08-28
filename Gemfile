@@ -15,12 +15,13 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'bootsnap'
 gem 'jbuilder', '~> 2.5'
+gem 'faraday'
+gem 'figaro'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
-  gem 'figaro'
   gem 'pry'
   gem 'travis'
 end
@@ -38,6 +39,8 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -22,7 +22,7 @@ RSpec.describe 'movie discover page' do
         expect(page).to have_button('Find Top Rated Movies')
       end
 
-      context 'when I click on the discover top 40 movies button' do
+      context 'when I click on the discover top 40 movies button', :vcr do
         before { click_button('Find Top Rated Movies') }
 
         it 'refreshes the discover page' do
@@ -43,7 +43,7 @@ RSpec.describe 'movie discover page' do
         expect(page).to have_button('Find Movies')
       end
 
-      context 'when I fill in the search form and click Find Movies' do
+      context 'when I fill in the search form and click Find Movies', :vcr do
         let(:movie_title) { 'The Shining' }
         let(:vote_average) { 5 }
 
