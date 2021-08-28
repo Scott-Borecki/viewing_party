@@ -1,20 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe 'movies page' do
+RSpec.describe 'movie discover page' do
   # As an authenticated user,
-  # When I visit the movies page,
-  # I should see the 40 results from my search,
-  # I should also see the "Find Top Rated Movies" button and the Find Movies form at the top of the page.
+  # When I visit the '/discover' path
+  # I should see
   #
-  # Details: The results from the search should appear on this page, and there should only be a maximum of 40 results. The following details should be listed for each movie.
+  #  Button to Discover top 40 movies
+  # Details When the user clicks on the top 40 button they should be taken to the movies page.
   #
-  #  Title (As a Link to the Movie Details page)
-  #  Vote Average of the movie
+  #  A text field to enter keyword(s) to search by movie title
+  #  A Button to Search by Movie Title
+  # Details When the user clicks on the Search button they should be taken to the movies page
+
   describe 'as an authenticated user' do
     # create user and stub current_user
 
-    describe 'when I visit the "/movies" path' do
-      before { visit '/movies' }
+    describe 'when I visit the "/discover" path' do
+      before { visit '/discover' }
 
       it 'displays a button to discover top 40 movies' do
         expect(page).to have_button('Find Top Rated Movies')
@@ -23,7 +25,7 @@ RSpec.describe 'movies page' do
       context 'when I click on the discover top 40 movies button', :vcr do
         before { click_button('Find Top Rated Movies') }
 
-        it 'renders the movies page with query params' do
+        it 'redirects me to the movies page with query params' do
           expect(current_path).to eq('/movies')
         end
 
@@ -50,7 +52,7 @@ RSpec.describe 'movies page' do
           click_button 'Find Movies'
         end
 
-        it 'renders the movies page with query params' do
+        it 'redirects me to the movies page with query params' do
           expect(current_path).to eq('/movies')
         end
 
