@@ -44,8 +44,8 @@ RSpec.describe 'movie discover page' do
       end
 
       context 'when I fill in the search form and click Find Movies', :vcr do
-        let(:movie_title) { 'The Shining' }
-        let(:vote_average) { 5 }
+        let(:movie_title) { 'Shining' }
+        let(:movies) { MovieFacade.search_by_title(movie_title) }
 
         before do
           fill_in :search, with: movie_title
@@ -56,9 +56,14 @@ RSpec.describe 'movie discover page' do
           expect(current_path).to eq('/discover')
         end
 
-        xit 'diplays the movies that match the search query' do
-          expect(page).to have_link(movie_title)
-          expect(page).to have_content(vote_average)
+        it 'diplays the movies that match the search query' do
+          movies.each do |movie|
+            within "#movie-#{movie.id}" do
+              expect(page).to have_link(movie.title)
+              expect(page).to have_content(movie.vote_average)
+              expect(movie.title).to include(movie_title)
+            end
+          end
         end
       end
     end

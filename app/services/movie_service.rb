@@ -1,4 +1,6 @@
 class MovieService
+  # TODO: update so 40 results are returned
+
   def self.search_by_title(search)
     response = conn.get('/3/search/movie') do |req|
       req.params['query'] = search

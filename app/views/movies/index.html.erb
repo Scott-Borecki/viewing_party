@@ -14,9 +14,9 @@
     </tr>
 
     <% @movies.each do |movie| %>
-      <tr id='movie-<%= movie[:id] %>'>
-        <td><%= link_to movie[:title], '#' %></td>
-        <td><%= movie[:vote_average] %></td>
+      <tr id='movie-<%= movie.id %>'>
+        <td><%= link_to movie.title, '#' %></td>
+        <td><%= movie.vote_average %></td>
       </tr>
     <% end %>
   </table>
