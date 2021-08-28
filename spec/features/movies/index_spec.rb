@@ -52,8 +52,8 @@ RSpec.describe 'movie discover page' do
           click_button 'Find Movies'
         end
 
-        xit 'redirect me to the discover page with query params' do
-          expect(page).to have_current_path('/discover?search=The+Shining')
+        it 'redirect me to the discover page with query params' do
+          expect(current_path).to eq('/discover')
         end
 
         xit 'diplays the movies that match the search query' do

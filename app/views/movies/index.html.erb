@@ -5,3 +5,19 @@
 
   <%= form.submit 'Find Movies' %>
 <% end %>
+
+<% if @movies %>
+  <table>
+    <tr>
+      <th>Movie Title</th>
+      <th>Vote Average</th>
+    </tr>
+
+    <% @movies.each do |movie| %>
+      <tr id='movie-<%= movie[:id] %>'>
+        <td><%= link_to movie[:title], '#' %></td>
+        <td><%= movie[:vote_average] %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
