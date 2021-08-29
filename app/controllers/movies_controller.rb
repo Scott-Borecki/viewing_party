@@ -6,4 +6,7 @@ class MoviesController < ApplicationController
       render 'movies/index'
     end
   end
+
+  def discover
+  end
 end

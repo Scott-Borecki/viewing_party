@@ -1,1 +1,19 @@
-<h1>Welcome, <%= @user.email %>!</h1>
+<h1>Welcome, <%= current_user.email %>!</h1>
+
+<%= button_to 'Discover Movies', '/discover', method: :get %>
+
+<div id="friends">
+  <%= form_with url: '/friendships', method: :post, local: true do |form| %>
+    <%= form.text_field :friend_email %>
+
+    <%= form.submit 'Add Friend' %>
+  <% end %>
+
+  <% if current_user.followees.size.positive? %>
+    <% current_user.followees.each do |friend| %>
+      <p><%= friend.email %></p>
+    <% end %>
+  <% else  %>
+    <p>You currently have no friends.</p>
+  <% end %>
+</div>
