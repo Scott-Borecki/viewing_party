@@ -28,6 +28,8 @@ RSpec.describe 'new viewing party event page' do
     let!(:followee3) { user.followees.create(email: 'email4', password: 'test4') }
     # TODO: Need to add 'runtime' to Movie PORO and API call
     let(:movie) { Movie.new(id: 550, title: 'Fight Club', vote_average: 8.4, runtime: 139) }
+    let(:date) { 'January 1, 2022' }
+    let(:start_time) { '5:00 PM' }
 
     before do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
@@ -36,7 +38,7 @@ RSpec.describe 'new viewing party event page' do
     describe 'when I visit the new viewing party event page' do
       # THOUGHT: The new event page is accessed through the movie details page.
       #          So ... maybe '/movie/:movie_id/event/new'?
-      before { visit new_viewing_party_path(movie) }
+      before { visit new_event_path(movie) }
 
       xit 'displays the movie title name' do
         expect(page).to have_content(movie.title)
@@ -48,7 +50,7 @@ RSpec.describe 'new viewing party event page' do
         expect(page).to have_field(:when)
         expect(page).to have_field(:start_time)
 
-        user.followeed.each do |followee|
+        user.followees.each do |followee|
           # TODO: Might need to confirm this is correct syntax
           expect(page).to have_unchecked_field(followee.email)
         end
@@ -59,9 +61,9 @@ RSpec.describe 'new viewing party event page' do
       context 'when I fill in the form with valid inputs and click "Create Viewing Party"' do
         before do
           # TODO: Need to check how date input will be formatted
-          fill_in :when, with: 'January 1, 2022'
+          fill_in :when, with: date
           # TODO: Need to check how time input will be formatted
-          fill_in :start_time, with: '5:00 PM'
+          fill_in :start_time, with: start_time
 
           user.followees[0..1].each do |followee|
             check followee.email
@@ -79,6 +81,8 @@ RSpec.describe 'new viewing party event page' do
         xit 'displays the new event in the Viewing Parties section' do
           within '#events' do
             expect(page).to have_content(movie.title)
+            expect(page).to have_content(date)
+            expect(page).to have_content(start_time)
           end
         end
 
@@ -91,6 +95,8 @@ RSpec.describe 'new viewing party event page' do
 
           within '#events' do
             expect(page).to have_content(movie.title)
+            expect(page).to have_content(date)
+            expect(page).to have_content(start_time)
           end
         end
       end
@@ -99,9 +105,9 @@ RSpec.describe 'new viewing party event page' do
         before do
           fill_in :duration, with: (movie.duration - 1)
           # TODO: Need to check how date input will be formatted
-          fill_in :when, with: 'January 1, 2022'
+          fill_in :when, with: date
           # TODO: Need to check how time input will be formatted
-          fill_in :start_time, with: '5:00 PM'
+          fill_in :start_time, with: start_time
 
           user.followees[0..1].each do |followee|
             check followee.email
@@ -113,7 +119,7 @@ RSpec.describe 'new viewing party event page' do
         xit 'renders the new event page' do
           # THOUGHT: The new event page is accessed through the movie details page.
           #          So ... maybe '/movie/:movie_id/event/new'?
-          expect(page).to have_current_path(new_viewing_party_path(movie))
+          expect(page).to have_current_path(new_event_path(movie))
         end
 
         xit 'displays an error flash message' do
@@ -140,7 +146,7 @@ RSpec.describe 'new viewing party event page' do
         xit 'renders the new event page' do
           # THOUGHT: The new event page is accessed through the movie details page.
           #          So ... maybe '/movie/:movie_id/event/new'?
-          expect(page).to have_current_path(new_viewing_party_path(movie))
+          expect(page).to have_current_path(new_event_path(movie))
         end
 
         xit 'displays an error flash message' do
