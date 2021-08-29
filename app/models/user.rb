@@ -11,6 +11,7 @@ class User < ApplicationRecord
                              inverse_of: 'followee'
   has_many :followers, through: :following_users
   has_many :invitations, dependent: :destroy
+  has_many :invited_events, through: :invitations, source: :event
 
   validates :email, presence: true, uniqueness: true
   # validates_presence_of :password, require: true
