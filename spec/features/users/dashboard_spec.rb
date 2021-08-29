@@ -96,22 +96,82 @@ RSpec.describe 'user dashboard page' do
         end
       end
 
-      # As an authenticated user,
-      # I should see the viewing parties I have been invited to with the following details:
-      #
-      # Movie Title, which links to the movie show page
-      # Date and Time of Event
-      # who is hosting the event
-      # list of friends invited, with my name in bold
-      # I should also see the viewing parties that I have created with the following details:
-      #
-      # Movie Title, which links to the movie show page
-      # Date and Time of Event
-      # That I am the host of the party
-      # List of friends invited to the viewing party
+      describe 'within the viewing parties section' do
+        it 'displays a viewing parties section' do
+          user2 = User.create(email: 'email2', password: 'password')
+          Friendship.create(followee_id: user.id, follower_id: user2.id)
 
-      it 'displays a viewing parties section' do
+          their_viewing_party = Event.create(
+            user_id: user2.id,
+            movie_id: 550,
+            date_time: 'December 10, 2021 7:00 pm',
+            duration: 139
+          )
+          Invitation.create(event: their_viewing_party, user: user)
 
+          my_viewing_party = Event.create(
+            user_id: user.id,
+            movie_id: 550,
+            date_time: 'December 11, 2021 5:00 pm',
+            duration: 139
+          )
+
+          user3 = User.create(email: 'email3', password: 'password')
+          user4 = User.create(email: 'email4', password: 'password')
+
+          Friendship.create(followee_id: user3.id, follower_id: user.id)
+          Friendship.create(followee_id: user4.id, follower_id: user.id)
+
+          Invitation.create(event: my_viewing_party, user: user3)
+          Invitation.create(event: my_viewing_party, user: user4)
+
+          user.reload
+
+          visit '/dashboard'
+
+          expect(page).to have_css('#events')
+
+          within "#events" do
+            within "#event-#{my_viewing_party.id}" do
+              # TODO: Update movie id to movie title
+              # TODO: Add test to confirm link redirects to movie page
+              expect(page).to have_link(my_viewing_party.movie_id.to_s)
+              # TODO: Confirm output of date_time.  Also, make a different line for date and time.
+              expect(page).to have_content(my_viewing_party.date_time)
+              expect(page).to have_content(my_viewing_party.duration)
+              expect(page).to have_content(my_viewing_party.user.email)
+              my_viewing_party.users.each do |guest|
+                expect(page).to have_content(guest.email)
+              end
+              #
+              # click_link my_viewing_party.movie_id.to_s
+              #
+              # expect(page).to have_current_path("/movies/#{my_viewing_party.movie_id}")
+            end
+          end
+
+          visit '/dashboard'
+
+          within "#events" do
+            within "#event-#{their_viewing_party.id}" do
+              # TODO: Update movie id to movie title
+              # TODO: Add test to confirm link redirects to movie page
+              expect(page).to have_link(their_viewing_party.movie_id.to_s)
+              # TODO: Confirm output of date_time.  Also, make a different line for date and time.
+              expect(page).to have_content(their_viewing_party.date_time)
+              expect(page).to have_content(their_viewing_party.duration)
+              expect(page).to have_content(their_viewing_party.user.email)
+              their_viewing_party.users.each do |guest|
+                # TODO: Make current_user's name bold in invited list
+                expect(page).to have_content(guest.email)
+              end
+              #
+              # click_link their_viewing_party.movie_id.to_s
+              #
+              # expect(page).to have_current_path("/movies/#{their_viewing_party.movie_id}")
+            end
+          end
+        end
       end
     end
   end

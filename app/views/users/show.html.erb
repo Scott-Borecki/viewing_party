@@ -17,3 +17,31 @@
     <p>You currently have no friends.</p>
   <% end %>
 </div>
+
+<div id="events">
+  <% current_user.events.each do |event| %>
+    <div id='event-<%= event.id %>'>
+      Movie Title: <%= link_to event.movie_id, '#' %><br>
+      Date: <%= event.date_time %><br>
+      Time: <br>
+      Duration: <%= event.duration %><br>
+      Host: <%= event.user.email %><br>
+      Guests: <% event.users.each do |guest| %>
+      <%= guest.email %><br>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% current_user.invited_events.each do |event| %>
+    <div id='event-<%= event.id %>'>
+      Movie Title: <%= link_to event.movie_id, '#' %><br>
+      Date: <%= event.date_time %><br>
+      Time: <br>
+      Duration: <%= event.duration %><br>
+      Host: <%= event.user.email %><br>
+      Guests: <% event.users.each do |guest| %>
+      <%= guest.email %><br>
+      <% end %>
+    </div>
+  <% end %>
+</div>
