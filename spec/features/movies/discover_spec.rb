@@ -1,17 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'movie discover page' do
-  # As an authenticated user,
-  # When I visit the '/discover' path
-  # I should see
-  #
-  #  Button to Discover top 40 movies
-  # Details When the user clicks on the top 40 button they should be taken to the movies page.
-  #
-  #  A text field to enter keyword(s) to search by movie title
-  #  A Button to Search by Movie Title
-  # Details When the user clicks on the Search button they should be taken to the movies page
-
   describe 'as an authenticated user' do
     # create user and stub current_user
 
@@ -29,12 +18,13 @@ RSpec.describe 'movie discover page' do
           expect(current_path).to eq('/movies')
         end
 
-        xit 'displays the top 40 movies' do
-          # 'This' before 'That'
-          # Create some fake movie data to load into test
+        it 'displays the top 40 movies' do
+          top_movies = MovieFacade.top_40_movies
 
-          # expect(movie1).to appear_before(movie2)
-          # expect(movie2).to appear_before(movie3)
+          top_movies.each do |movie|
+            expect(page).to have_content(movie.title)
+            expect(page).to have_content(movie.vote_average)
+          end
         end
       end
 
