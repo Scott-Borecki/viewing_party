@@ -20,4 +20,16 @@ describe Event, type: :model do
     it { should have_many(:invitations) }
     it { should have_many(:users).through(:invitations) }
   end
+
+  describe 'instance methods' do
+    describe '#movie_title' do
+      it 'returns the movie title by movie id', :vcr do
+        user = User.create(email: 'funbucket13', password: 'test')
+        movie = MovieFacade.search_by_id(550)
+        event = Event.create(user: user, movie_id: movie.id, duration: movie.runtime)
+
+        expect(event.movie_title).to eq('Fight Club')
+      end
+    end
+  end
 end

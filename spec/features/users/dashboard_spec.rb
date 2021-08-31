@@ -5,6 +5,7 @@ RSpec.describe 'user dashboard page' do
     let(:email) { 'funbucket13' }
     let(:password) { 'test' }
     let(:user) { User.create(email: email, password: password) }
+    let(:movie) { MovieFacade.search_by_id(550) }
 
     before do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
@@ -97,7 +98,7 @@ RSpec.describe 'user dashboard page' do
       end
 
       describe 'within the viewing parties section' do
-        it 'displays a viewing parties section' do
+        it 'displays a viewing parties section', :vcr do
           user2 = User.create(email: 'email2', password: 'password')
           Friendship.create(followee_id: user.id, follower_id: user2.id)
 
@@ -135,9 +136,9 @@ RSpec.describe 'user dashboard page' do
             within "#event-#{my_viewing_party.id}" do
               # TODO: Update movie id to movie title
               # TODO: Add test to confirm link redirects to movie page
-              expect(page).to have_link(my_viewing_party.movie_id.to_s)
-              # TODO: Confirm output of date_time.  Also, make a different line for date and time.
-              expect(page).to have_content(my_viewing_party.date_time)
+              expect(page).to have_link(movie.title)
+              expect(page).to have_content(my_viewing_party.date_time.strftime('%A, %B %-d, %Y'))
+              expect(page).to have_content(my_viewing_party.date_time.strftime('%l:%M %p'))
               expect(page).to have_content(my_viewing_party.duration)
               expect(page).to have_content(my_viewing_party.user.email)
               my_viewing_party.users.each do |guest|
@@ -156,9 +157,9 @@ RSpec.describe 'user dashboard page' do
             within "#event-#{their_viewing_party.id}" do
               # TODO: Update movie id to movie title
               # TODO: Add test to confirm link redirects to movie page
-              expect(page).to have_link(their_viewing_party.movie_id.to_s)
-              # TODO: Confirm output of date_time.  Also, make a different line for date and time.
-              expect(page).to have_content(their_viewing_party.date_time)
+              expect(page).to have_link(movie.title)
+              expect(page).to have_content(their_viewing_party.date_time.strftime('%A, %B %-d, %Y'))
+              expect(page).to have_content(their_viewing_party.date_time.strftime('%l:%M %p'))
               expect(page).to have_content(their_viewing_party.duration)
               expect(page).to have_content(their_viewing_party.user.email)
               their_viewing_party.users.each do |guest|
