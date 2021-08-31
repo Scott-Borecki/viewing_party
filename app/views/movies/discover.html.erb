@@ -1,4 +1,5 @@
 <%= button_to 'Find Top Rated Movies', '/movies', method: :get %>
+<%= button_to 'Find Trending Movies', '/movies', method: :get, params: { trending: true } %>
 
 <%= form_with url: '/movies', method: :get, local: true do |form| %>
   <%= form.text_field :search %>
