@@ -2,6 +2,16 @@ require 'rails_helper'
 
 RSpec.describe MovieFacade do
   describe "class methods" do
+    describe ".top_40_movies" do
+      it "returns an array of the top 40 movies as movie objects", :vcr do
+        movies = MovieFacade.top_40_movies
+
+        expect(movies).to be_an Array
+        expect(movies.first).to be_a Movie
+        expect(movies.size).to eq(40)
+      end
+    end
+
     describe ".search_by_title" do
       it "returns an array of movie objects", :vcr do
         movies = MovieFacade.search_by_title('Shining')

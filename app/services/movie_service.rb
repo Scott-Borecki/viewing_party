@@ -1,6 +1,24 @@
 class MovieService
   # TODO: update so 40 results are returned
 
+  def self.top_40_movies
+    response1 = conn.get('/3/discover/movie')
+
+    body1 = JSON.parse(response1.body, symbolize_names: true)
+
+    response2 = conn.get('/3/discover/movie') do |req|
+      req.params['page'] = 2
+    end
+
+    body2 = JSON.parse(response2.body, symbolize_names: true)
+
+    body2[:results].each do |movie_hash|
+      body1[:results] << movie_hash
+    end
+
+    body1
+  end
+
   def self.search_by_title(search)
     response1 = conn.get('/3/search/movie') do |req|
       req.params['query'] = search

@@ -2,6 +2,25 @@ require 'rails_helper'
 
 describe MovieService do
   context "class methods" do
+    context ".top_40_movies" do
+      it "returns movie data by title search", :vcr do
+        search = MovieService.top_40_movies
+        expect(search).to be_a Hash
+        expect(search[:results]).to be_an Array
+        expect(search[:results].size).to eq(40)
+        movie_data = search[:results].first
+
+        expect(movie_data).to have_key :id
+        expect(movie_data[:id]).to be_an(Integer)
+
+        expect(movie_data).to have_key :title
+        expect(movie_data[:title]).to be_a(String)
+
+        expect(movie_data).to have_key :vote_average
+        expect(movie_data[:vote_average]).to be_a(Numeric)
+      end
+    end
+
     context ".search_by_title" do
       it "returns movie data by title search", :vcr do
         search = MovieService.search_by_title('Shining')
@@ -17,7 +36,7 @@ describe MovieService do
         expect(movie_data[:title]).to be_a(String)
 
         expect(movie_data).to have_key :vote_average
-        expect(movie_data[:vote_average]).to be_a(Float)
+        expect(movie_data[:vote_average]).to be_a(Numeric)
       end
     end
 
@@ -33,7 +52,7 @@ describe MovieService do
         expect(search[:title]).to be_a(String)
 
         expect(search).to have_key :vote_average
-        expect(search[:vote_average]).to be_a(Float)
+        expect(search[:vote_average]).to be_a(Numeric)
 
         expect(search).to have_key :runtime
         expect(search[:runtime]).to be_a(Integer)

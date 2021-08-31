@@ -1,4 +1,12 @@
 class MovieFacade
+  def self.top_40_movies
+    json = MovieService.top_40_movies
+
+    json[:results].map do |movie_data|
+      Movie.new(movie_data)
+    end
+  end
+
   def self.search_by_title(title)
     json = MovieService.search_by_title(title)
 
