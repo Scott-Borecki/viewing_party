@@ -63,6 +63,16 @@ RSpec.describe 'movies page' do
             end
           end
         end
+
+        context 'when I click on a movie title' do
+          it 'redirects me to the movie show page' do
+            movie = movies.first
+
+            click_link movie.title
+
+            expect(page).to have_current_path(movie_path(movie.id))
+          end
+        end
       end
     end
   end
