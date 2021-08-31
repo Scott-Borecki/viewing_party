@@ -14,9 +14,10 @@ class Event < ApplicationRecord
   end
 
   def duration_cannot_be_less_than_movie_runtime
-    return unless movie_id.present? && movie_id > 0
-    if duration < MovieFacade.search_by_id(movie_id).runtime
-      errors.add(:duration, "can't be less than the movie runtime")
-    end
+    return if movie_id.blank?
+    return unless movie_id.positive?
+    return unless duration < MovieFacade.search_by_id(movie_id).runtime
+
+    errors.add(:duration, "can't be less than the movie runtime")
   end
 end

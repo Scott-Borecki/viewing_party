@@ -6,16 +6,17 @@ class EventsController < ApplicationController
 
   def create
     params[:date_time] = DateTime.civil(
-      params[:date]["when(1i)"].to_i,
-      params[:date]["when(2i)"].to_i,
-      params[:date]["when(3i)"].to_i,
-      params[:time]["start_time(4i)"].to_i,
-      params[:time]["start_time(5i)"].to_i
+      params[:date]['when(1i)'].to_i,
+      params[:date]['when(2i)'].to_i,
+      params[:date]['when(3i)'].to_i,
+      params[:time]['start_time(4i)'].to_i,
+      params[:time]['start_time(5i)'].to_i
     )
     new_event = current_user.events.create(event_params)
     if new_event.save
       params['invitations'].each do |email, value|
         next unless value == '1'
+
         user = User.find_by(email: email)
         new_event.invitations.create!(user: user)
       end
