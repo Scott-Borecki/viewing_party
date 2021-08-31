@@ -2,7 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'movies page' do
   describe 'as an authenticated user' do
-    # create user and stub current_user
+    let(:email) { 'funbucket13' }
+    let(:password) { 'test' }
+    let(:user) { User.create(email: email, password: password) }
+    let(:movie) { MovieFacade.search_by_id(550) }
+
+    before do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    end
 
     describe 'when I visit the "/movies" path', :vcr do
       before { visit '/movies' }
