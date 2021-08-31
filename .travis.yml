@@ -8,8 +8,8 @@ script:
 - bundle exec rspec
 deploy:
   provider: heroku
-  api_key:
-  app:
+  api_key: heroku_api_key
+  app: rocky-crag-38133
   run:
     - rails db:migrate
     - restart
