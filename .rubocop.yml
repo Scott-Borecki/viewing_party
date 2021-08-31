@@ -24,6 +24,10 @@ Style/Documentation:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Style/EmptyMethod:
+  Exclude:
+    - 'app/controllers/**/*'
+
 Style/SafeNavigation:
   Enabled: false
 

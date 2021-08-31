@@ -1,14 +1,5 @@
 require 'rails_helper'
 
-# When a user visits the root path they should be on the welcome page which includes:
-#
-#  Welcome message
-#  Brief description of the application
-#  Button to Log in
-#  Link to Registration
-#
-# Details: Implement basic auth in the application allowing a user to log in with an email and password. The password should be stored in the database using bcrypt.
-
 RSpec.describe 'User registration form' do
   it 'creates new user, happy path' do
     visit root_path

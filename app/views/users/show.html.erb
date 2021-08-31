@@ -1,1 +1,51 @@
-<h1>Welcome, <%= @user.email %>!</h1>
+<h1>Welcome, <%= current_user.email %>!</h1>
+
+<%= button_to 'Discover Movies', '/discover', method: :get %>
+
+<div id="friends">
+  <%= form_with url: '/friendships', method: :post, local: true do |form| %>
+    <%= form.text_field :friend_email %>
+
+    <%= form.submit 'Add Friend' %>
+  <% end %>
+
+  <% if current_user.followees.size.positive? %>
+    <% current_user.followees.each do |friend| %>
+      <p><%= friend.email %></p>
+    <% end %>
+  <% else  %>
+    <p>You currently have no friends.</p>
+  <% end %>
+</div>
+
+<div id="events">
+  <% current_user.events.each do |event| %>
+    <div id='event-<%= event.id %>'>
+      Movie Title: <%= link_to event.movie_title, '#' %><br>
+      Date: <%= event.date_time.strftime('%A, %B %-d, %Y') %><br>
+      Time: <%= event.date_time.strftime('%l:%M %p') %><br>
+      Duration: <%= event.duration %><br>
+      Host: <%= event.user.email %><br>
+      Guests: <% event.users.each do |guest| %>
+                <%= guest.email %><br>
+              <% end %>
+    </div>
+  <% end %>
+
+  <% current_user.invited_events.each do |event| %>
+    <div id='event-<%= event.id %>'>
+      Movie Title: <%= link_to event.movie_title, '#' %><br>
+      Date: <%= event.date_time.strftime('%A, %B %-d, %Y') %><br>
+      Time: <%= event.date_time.strftime('%l:%M %p') %><br>
+      Duration: <%= event.duration %><br>
+      Host: <%= event.user.email %><br>
+      Guests: <% event.users.each do |guest| %>
+                <% if guest.email == current_user.email %>
+                  <b><%= guest.email %></b><br>
+                <% else %>
+                  <%= guest.email %><br>
+                <% end %>
+              <% end %>
+    </div>
+  <% end %>
+</div>
