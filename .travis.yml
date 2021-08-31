@@ -8,10 +8,11 @@ script:
 - bundle exec rspec
 deploy:
   provider: heroku
-  api_key: heroku_api_key
+  api_key:
+    secure: hDMCj5RPc4PNz4z6jQCRKzOvF2361ufoCwKvtmrGyX0B1/yDONkYuFUIJiyxQMngT3JvFrgJH6KThFKY5wPBEeMNSeNNBeVfT8aWHqKLadLJuU8+j5g8Tfy7xbb4fLsikJ+9Iyxb5/p4WlhnDtVEiKlfOyQJoyf3sZPCkGPd/cQ5nHUCTOGZZuMBlOgYhYXGvgecVFZyk7hQfVWvxIsiSYQlqR3f77PjSdJ5h8xfQ6DK2BEc2yL8Ju+zuBcvjO34r6uxmm/PWOkZ15/agUrUEdb75FXmheyuShvrzZc54CepuxN6G1LrftkIBGM9fXxj3G/htr+bp3uFt4ZQpf7aMTognFFO/FL0q74QDAYZFes1UtsYU62KHRlksBt/U3YncvHyZ3TkMOwVYKO1fSLdffSyy0kM/EDH4/uZQZegxuWRLy5hoRl4nkH5IzxuaskOzrbXH5CnTGnwTNJoqLbV9PppLIvgsRWxOrFbzzhwtZFWgLj72LkPBl3lXP6vGyillRza85dTNMnC4f4wczw+yLagPVtL0uM43NHLAuyV+/DuW8qfA/zwe8SyHri3QvxESMSWn0mjygsFhRC8+1Uj3/2guy/W56xdS8y6uzBZSfXkKEwk4/gk+s+rsuYs3RRedvWHCfjxG0eCexG8a90m8wZMrjebnnCLBnxtCMRp59M=
   on:
     branch: main
   app: rocky-crag-38133
   run:
-    - rails db:migrate
-    - restart
+  - rails db:migrate
+  - restart
