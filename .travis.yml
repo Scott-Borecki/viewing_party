@@ -9,6 +9,8 @@ script:
 deploy:
   provider: heroku
   api_key: heroku_api_key
+  on:
+    branch: main
   app: rocky-crag-38133
   run:
     - rails db:migrate
