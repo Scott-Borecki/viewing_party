@@ -1,11 +1,11 @@
-# Little Esty Shop Bulk Discounts
+# Viewing Party
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 
-Link to Live Application: [Viewing Party]()
+Link to Live Application: [Viewing Party](https://rocky-crag-38133.herokuapp.com/)
 
 ## Table of Contents
 
@@ -107,11 +107,11 @@ Project requirements: [link](https://backend.turing.edu/module3/projects/viewing
 
 ## Contributors
 
-👤  **Antonio King**
+![](https://avatars.githubusercontent.com/u/81713591?s=25)  **Antonio King**
 - Github: [antoniojking](https://github.com/antoniojking)
 - LinkedIn: [Antonio King](https://www.linkedin.com/in/antoniojking/)
 
-👤  **Scott Borecki**
+![](https://avatars.githubusercontent.com/u/79381792?s=25)  **Scott Borecki**
 - Github: [Scott-Borecki](https://github.com/Scott-Borecki)
 - LinkedIn: [Scott Borecki](https://www.linkedin.com/in/scott-borecki/)
 
