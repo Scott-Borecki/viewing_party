@@ -21,6 +21,25 @@ describe MovieService do
       end
     end
 
+    context '.trending_movies' do
+      it 'returns the trending movies this week', :vcr do
+        trending = MovieService.trending_movies
+        expect(trending).to be_a Hash
+        expect(trending[:results]).to be_an Array
+        expect(trending[:results].size).to eq(40)
+        movie_data = trending[:results].first
+
+        expect(movie_data).to have_key :id
+        expect(movie_data[:id]).to be_an(Integer)
+
+        expect(movie_data).to have_key :title
+        expect(movie_data[:title]).to be_a(String)
+
+        expect(movie_data).to have_key :vote_average
+        expect(movie_data[:vote_average]).to be_a(Numeric)
+      end
+    end
+
     context ".search_by_title" do
       it "returns movie data by title search", :vcr do
         search = MovieService.search_by_title('Shining')
