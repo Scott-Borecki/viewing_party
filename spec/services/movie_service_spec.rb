@@ -3,10 +3,11 @@ require 'rails_helper'
 describe MovieService do
   context "class methods" do
     context ".search_by_title" do
-      it "returns movie data", :vcr do
+      it "returns movie data by title search", :vcr do
         search = MovieService.search_by_title('Shining')
         expect(search).to be_a Hash
         expect(search[:results]).to be_an Array
+        expect(search[:results].size).to eq(40)
         movie_data = search[:results].first
 
         expect(movie_data).to have_key :id
