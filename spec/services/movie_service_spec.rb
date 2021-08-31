@@ -20,6 +20,71 @@ describe MovieService do
       end
     end
 
+    context ".search_by_id" do
+      it "returns movie data by movie id", :vcr do
+        search = MovieService.search_by_id(550)
+        expect(search).to be_a Hash
+
+        expect(search).to have_key :id
+        expect(search[:id]).to be_an(Integer)
+
+        expect(search).to have_key :title
+        expect(search[:title]).to be_a(String)
+
+        expect(search).to have_key :vote_average
+        expect(search[:vote_average]).to be_a(Float)
+
+        expect(search).to have_key :runtime
+        expect(search[:runtime]).to be_a(Integer)
+
+        expect(search).to have_key :genres
+        expect(search[:genres]).to be_a(Array)
+
+        expect(search[:genres].first).to be_a Hash
+        expect(search[:genres].first).to have_key :name
+        expect(search[:genres].first[:name]).to be_a(String)
+
+        expect(search).to have_key :overview
+        expect(search[:overview]).to be_a(String)
+      end
+    end
+
+    context ".cast_members_by_movie_id" do
+      it "returns cast members by movie id", :vcr do
+        cast_members = MovieService.cast_members_by_movie_id(550)
+        expect(cast_members).to be_a Hash
+
+        expect(cast_members).to have_key :cast
+        expect(cast_members[:cast]).to be_an(Array)
+
+        expect(cast_members[:cast].first).to be_a Hash
+
+        expect(cast_members[:cast].first).to have_key :name
+        expect(cast_members[:cast].first[:name]).to be_a(String)
+
+        expect(cast_members[:cast].first).to have_key :character
+        expect(cast_members[:cast].first[:character]).to be_a(String)
+      end
+    end
+
+    context ".reviews_by_movie_id" do
+      it "returns reviews by movie id", :vcr do
+        reviews = MovieService.reviews_by_movie_id(550)
+        expect(reviews).to be_a Hash
+
+        expect(reviews).to have_key :results
+        expect(reviews[:results]).to be_an(Array)
+
+        expect(reviews[:results].first).to be_a Hash
+
+        expect(reviews[:results].first).to have_key :author
+        expect(reviews[:results].first[:author]).to be_a(String)
+
+        expect(reviews[:results].first).to have_key :content
+        expect(reviews[:results].first[:content]).to be_a(String)
+      end
+    end
+
     context ".conn" do
       it "does something", :vcr do
         conn = MovieService.conn
