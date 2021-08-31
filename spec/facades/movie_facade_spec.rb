@@ -30,6 +30,7 @@ RSpec.describe MovieFacade do
 
         expect(cast_members).to be_an Array
         expect(cast_members.first).to be_an Actor
+        expect(cast_members.size).to eq(10)
       end
     end
 
