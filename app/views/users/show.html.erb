@@ -27,8 +27,8 @@
       Duration: <%= event.duration %><br>
       Host: <%= event.user.email %><br>
       Guests: <% event.users.each do |guest| %>
-      <%= guest.email %><br>
-      <% end %>
+                <%= guest.email %><br>
+              <% end %>
     </div>
   <% end %>
 
@@ -40,8 +40,12 @@
       Duration: <%= event.duration %><br>
       Host: <%= event.user.email %><br>
       Guests: <% event.users.each do |guest| %>
-      <%= guest.email %><br>
-      <% end %>
+                <% if guest.email == current_user.email %>
+                  <b><%= guest.email %></b><br>
+                <% else %>
+                  <%= guest.email %><br>
+                <% end %>
+              <% end %>
     </div>
   <% end %>
 </div>

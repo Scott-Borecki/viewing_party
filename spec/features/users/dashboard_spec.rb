@@ -134,7 +134,6 @@ RSpec.describe 'user dashboard page' do
 
           within "#events" do
             within "#event-#{my_viewing_party.id}" do
-              # TODO: Update movie id to movie title
               # TODO: Add test to confirm link redirects to movie page
               expect(page).to have_link(movie.title)
               expect(page).to have_content(my_viewing_party.date_time.strftime('%A, %B %-d, %Y'))
@@ -155,7 +154,6 @@ RSpec.describe 'user dashboard page' do
 
           within "#events" do
             within "#event-#{their_viewing_party.id}" do
-              # TODO: Update movie id to movie title
               # TODO: Add test to confirm link redirects to movie page
               expect(page).to have_link(movie.title)
               expect(page).to have_content(their_viewing_party.date_time.strftime('%A, %B %-d, %Y'))
