@@ -12,6 +12,16 @@ RSpec.describe MovieFacade do
       end
     end
 
+    describe ".trending_movies" do
+      it "returns an array of the 40 trending movies this week as movie objects", :vcr do
+        movies = MovieFacade.trending_movies
+
+        expect(movies).to be_an Array
+        expect(movies.first).to be_a Movie
+        expect(movies.size).to eq(40)
+      end
+    end
+
     describe ".search_by_title" do
       it "returns an array of movie objects", :vcr do
         movies = MovieFacade.search_by_title('Shining')
