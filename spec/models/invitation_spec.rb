@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe Invitation, type: :model do
   describe 'validations' do
-    # EDGE CASE: User can only be invited to a Viewing Party once
+    it { should validate_presence_of(:event_id) }
+    it { should validate_presence_of(:user_id) }
   end
 
   describe 'relationships' do
