@@ -1,51 +1,110 @@
-<h1>Welcome, <%= current_user.email %>!</h1>
+<h1 class='center'>Welcome, <%= current_user.email %>!</h1>
 
-<%= button_to 'Discover Movies', '/discover', method: :get %>
+<div class="center">
+  <%= button_to 'Discover Movies', '/discover', method: :get, class: 'btn btn-warning' %>
+</div>
 
 <div id="friends">
+  <h2>Friends</h2>
+  <hr>
   <%= form_with url: '/friendships', method: :post, local: true do |form| %>
+    <b><%= form.label :friend_email, 'Friend Email:' %></b>
     <%= form.text_field :friend_email %>
 
-    <%= form.submit 'Add Friend' %>
+    <%= form.submit 'Add Friend', class: 'btn btn-warning' %>
   <% end %>
 
   <% if current_user.followees.size.positive? %>
-    <% current_user.followees.each do |friend| %>
-      <p><%= friend.email %></p>
-    <% end %>
+    <p>
+      <% current_user.followees.each do |friend| %>
+        <%= friend.email %><br>
+      <% end %>
+    </p>
   <% else  %>
     <p>You currently have no friends.</p>
   <% end %>
 </div>
 
 <div id="events">
+  <h2>Viewing Parties</h2>
+  <hr>
   <% current_user.events.each do |event| %>
-    <div id='event-<%= event.id %>'>
-      Movie Title: <%= link_to event.movie_title, movie_path(event.movie_id) %><br>
-      Date: <%= event.date_time.strftime('%A, %B %-d, %Y') %><br>
-      Time: <%= event.date_time.strftime('%l:%M %p') %><br>
-      Duration: <%= event.duration %><br>
-      Host: <%= event.user.email %><br>
-      Guests: <% event.users.each do |guest| %>
-                <%= guest.email %><br>
-              <% end %>
-    </div>
+    <table id='event-<%= event.id %>'>
+      <tr>
+        <th>Movie Title: </th>
+        <td><%= link_to event.movie_title, movie_path(event.movie_id) %></td>
+      </tr>
+
+      <tr>
+        <th>Date:</th>
+        <td><%= event.date_time.strftime('%A, %B %-d, %Y') %></td>
+      </tr>
+
+      <tr>
+        <th>Time:</th>
+        <td><%= event.date_time.strftime('%l:%M %p') %></td>
+      </tr>
+
+      <tr>
+        <th>Duration:</th>
+        <td><%= event.duration %> minutes</td>
+      </tr>
+
+      <tr>
+        <th>Host:</th>
+        <td><%= event.user.email %></td>
+      </tr>
+
+      <tr>
+        <th>Guests:</th>
+        <td>
+          <% event.users.each do |guest| %>
+            <%= guest.email %><br>
+          <% end %>
+        </td>
+      </tr>
+    </table>
   <% end %>
 
   <% current_user.invited_events.each do |event| %>
-    <div id='event-<%= event.id %>'>
-      Movie Title: <%= link_to event.movie_title, movie_path(event.movie_id) %><br>
-      Date: <%= event.date_time.strftime('%A, %B %-d, %Y') %><br>
-      Time: <%= event.date_time.strftime('%l:%M %p') %><br>
-      Duration: <%= event.duration %><br>
-      Host: <%= event.user.email %><br>
-      Guests: <% event.users.each do |guest| %>
-                <% if guest.email == current_user.email %>
-                  <b><%= guest.email %></b><br>
-                <% else %>
-                  <%= guest.email %><br>
-                <% end %>
-              <% end %>
-    </div>
+    <table id='event-<%= event.id %>'>
+      <tr>
+        <th>Movie Title:</th>
+        <td><%= link_to event.movie_title, movie_path(event.movie_id) %></td>
+      </tr>
+
+      <tr>
+        <th>Date:</th>
+        <td><%= event.date_time.strftime('%A, %B %-d, %Y') %></td>
+      </tr>
+
+      <tr>
+        <th>Time:</th>
+        <td><%= event.date_time.strftime('%l:%M %p') %></td>
+      </tr>
+
+      <tr>
+        <th>Duration (minutes):</th>
+        <td><%= event.duration %> minutes</td>
+      </tr>
+
+      <tr>
+        <th>Host:</th>
+        <td><%= event.user.email %></td>
+      </tr>
+
+      <tr>
+        <th>Guests:</th>
+        <td>
+          <% event.users.each do |guest| %>
+           <% if guest.email == current_user.email %>
+             <b><%= guest.email %></b><br>
+           <% else %>
+             <%= guest.email %><br>
+           <% end %>
+         <% end %>
+        </td>
+      </tr>
+    </table>
   <% end %>
 </div>

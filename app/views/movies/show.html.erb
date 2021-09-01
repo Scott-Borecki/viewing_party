@@ -2,7 +2,9 @@
   <img src="<%= @movie.poster.image %>", alt="Movie Poster" >
 </div>
 
-<%= button_to 'Create Viewing Party for Movie', new_movie_event_path(@movie.id), method: :get %>
+<br>
+
+<%= button_to 'Create Viewing Party for Movie', new_movie_event_path(@movie.id), method: :get, class: 'btn btn-warning' %>
 
 <h1><%= @movie.title %></h1>
 <p>Vote Average: <%= @movie.vote_average %></p>
@@ -23,7 +25,7 @@
 </div>
 
 <div id="reviews">
-  <h2><%= @movie.reviews.size %> Reviews</h2>
+  <h2><%= @movie.reviews.size %> Review(s)</h2>
   <% @movie.reviews.each do |review| %>
     <div>
       <p>Author: <%= review.author %></p>

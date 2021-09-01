@@ -1,19 +1,31 @@
-<h1>Welcome to Viewing Party!</h1>
+<div class="center">
+  <h1>Welcome to Viewing Party!</h1>
 
-<p>
-  <b>
-    This is the Viewing Party. Create an event, invite your friends, watch a movie together, have a great time, and repeat!
-  </b>
-</p>
+  <p>
+    <b>
+      This is the Viewing Party. Create an event, invite your friends, watch a movie together, have a great time, and repeat!
+    </b>
+  </p>
 
-<%= form_with url: login_path, method: :post, local: true do |form| %>
-  <%= form.label :email, 'Email:' %>
-  <%= form.text_field :email %>
+  <div class="container">
+    <%= form_with url: login_path, method: :post, local: true do |form| %>
+    <table class="justify-content-center">
+      <tr>
+        <th><%= form.label :email, 'Email:' %></th>
+        <td><%= form.text_field :email %></td>
+      </tr>
 
-  <%= form.label :password, 'Password:' %>
-  <%= form.password_field :password %>
+      <tr>
+        <th><%= form.label :password, 'Password:' %></th>
+        <td><%= form.password_field :password %></td>
+      </tr>
 
-  <%= form.submit 'Log In' %>
-<% end %>
+      <tr>
+        <td colspan='2'><%= form.submit 'Log In', class: 'btn btn-warning'%></td>
+      </tr>
+    </table>
+    <% end %>
+  </div>
 
-<%= link_to 'Register as a User', '/registration' %>
+  <%= link_to 'Register as a User', '/registration' %>
+</div>
