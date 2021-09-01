@@ -34,6 +34,14 @@ RSpec.describe MovieFacade do
       end
     end
 
+    describe ".image_by_movie_id" do
+      it "returns a movie image by id", :vcr do
+        movie_img = MovieFacade.image_by_movie_id(550)
+
+        expect(movie_img).to be_a Poster
+      end
+    end
+
     describe ".cast_members_by_movie_id" do
       it "returns an array of cast member objects by movie id", :vcr do
         cast_members = MovieFacade.cast_members_by_movie_id(550)

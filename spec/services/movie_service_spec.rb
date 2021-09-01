@@ -67,6 +67,15 @@ describe MovieService do
         expect(search).to have_key :overview
         expect(search[:overview]).to be_a(String)
       end
+
+      it "returns movie image by movie id", :vcr do
+        movie_img = MovieService.image_by_movie_id(550)
+        expect(movie_img).to be_a Hash
+
+        expect(movie_img).to have_key :id
+        expect(movie_img[:posters]).to be_an(Array)
+        expect(movie_img[:posters].first[:file_path]).to be_a(String)
+      end
     end
 
     context ".cast_members_by_movie_id" do

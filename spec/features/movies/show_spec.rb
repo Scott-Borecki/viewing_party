@@ -54,6 +54,10 @@ RSpec.describe 'Movie Details Page' do
           end
         end
       end
+
+      it 'displays movie poster' do
+        expect(page).to have_content(movie.poster.image)
+      end
     end
   end
 end

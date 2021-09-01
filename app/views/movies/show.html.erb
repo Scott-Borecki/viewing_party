@@ -1,5 +1,9 @@
 <%= button_to 'Create Viewing Party for Movie', new_movie_event_path(@movie.id), method: :get %>
 
+<img src=<%= @movie.poster.image %> alt="Movie Poster">
+
+<%= image_tag("/66RvLrRJTm4J8l3uHXWF09AICol.jpg") %>
+
 <h1><%= @movie.title %></h1>
 <p>Vote Average: <%= @movie.vote_average %></p>
 <p>Runtime: <%= convert_to_hr_min(@movie.runtime) %></p>

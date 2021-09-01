@@ -17,13 +17,19 @@ RSpec.describe Movie, :vcr do
   end
 
   describe 'instance methods' do
+    describe '#poster' do
+      it 'returns the poster in the movie' do
+        expect(movie.poster).to be_a Poster
+      end
+    end
+
     describe '#cast' do
       it 'returns the actors in the movie' do
         expect(movie.cast).to be_an Array
         expect(movie.cast.first).to be_an Actor
       end
     end
-    
+
     describe '#reviews' do
       it 'returns the reviews of the movie' do
         expect(movie.reviews).to be_an Array

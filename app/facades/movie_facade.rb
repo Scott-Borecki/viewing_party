@@ -21,6 +21,12 @@ class MovieFacade
     Movie.new(json)
   end
 
+  def self.image_by_movie_id(movie_id)
+    json = MovieService.image_by_movie_id(movie_id)
+    
+    Poster.new(json[:posters][0])
+  end
+
   def self.cast_members_by_movie_id(movie_id)
     json = MovieService.cast_members_by_movie_id(movie_id)
 

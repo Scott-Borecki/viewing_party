@@ -15,6 +15,10 @@ class Movie
     @overview     = attributes[:overview]
   end
 
+  def poster
+    MovieFacade.image_by_movie_id(id)
+  end
+
   def cast
     MovieFacade.cast_members_by_movie_id(id)
   end
