@@ -31,7 +31,7 @@ class MovieFacade
 
   def self.image_by_movie_id(movie_id)
     json = MovieService.image_by_movie_id(movie_id)
-    
+
     Poster.new(json[:posters][0])
   end
 
