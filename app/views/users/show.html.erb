@@ -21,7 +21,7 @@
 <div id="events">
   <% current_user.events.each do |event| %>
     <div id='event-<%= event.id %>'>
-      Movie Title: <%= link_to event.movie_title, '#' %><br>
+      Movie Title: <%= link_to event.movie_title, movie_path(event.movie_id) %><br>
       Date: <%= event.date_time.strftime('%A, %B %-d, %Y') %><br>
       Time: <%= event.date_time.strftime('%l:%M %p') %><br>
       Duration: <%= event.duration %><br>
@@ -34,7 +34,7 @@
 
   <% current_user.invited_events.each do |event| %>
     <div id='event-<%= event.id %>'>
-      Movie Title: <%= link_to event.movie_title, '#' %><br>
+      Movie Title: <%= link_to event.movie_title, movie_path(event.movie_id) %><br>
       Date: <%= event.date_time.strftime('%A, %B %-d, %Y') %><br>
       Time: <%= event.date_time.strftime('%l:%M %p') %><br>
       Duration: <%= event.duration %><br>
