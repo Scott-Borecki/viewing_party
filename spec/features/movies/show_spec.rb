@@ -54,6 +54,12 @@ RSpec.describe 'Movie Details Page' do
           end
         end
       end
+
+      it 'displays movie poster' do
+        # how to test for image content on html
+        # expect(page).to have_xpath("//image.tmdb.org/t/p/w500#{movie.poster.image}")
+        expect(page).to have_css("#image")
+      end
     end
   end
 end
