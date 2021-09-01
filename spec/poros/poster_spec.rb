@@ -8,6 +8,6 @@ RSpec.describe Poster do
     poster = Poster.new(attrs)
 
     expect(poster).to be_an Poster
-    expect(poster.image).to eq(attrs[:file_path])
+    expect(poster.image).to eq("https://image.tmdb.org/t/p/w500#{attrs[:file_path]}")
   end
 end
