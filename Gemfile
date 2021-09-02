@@ -19,6 +19,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'faraday'
 gem 'figaro'
+# See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'mini_racer', platforms: :ruby
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
