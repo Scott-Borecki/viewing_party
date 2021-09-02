@@ -23,7 +23,7 @@ class EventsController < ApplicationController
 
       redirect_to dashboard_path
     else
-      flash[:error] = "Error: #{error_message(new_event.errors)}"
+      flash[:danger] = "Error: #{error_message(new_event.errors)}"
       redirect_to URI(request.referer).path
     end
   end

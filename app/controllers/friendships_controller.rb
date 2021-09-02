@@ -5,7 +5,7 @@ class FriendshipsController < ApplicationController
       Friendship.create(followee_id: friend.id, follower_id: current_user.id)
       current_user.reload # Check if this was only needed in test environment
     else
-      flash[:error] = 'User does not exist.'
+      flash[:danger] = 'User does not exist.'
     end
 
     redirect_to URI(request.referer).path

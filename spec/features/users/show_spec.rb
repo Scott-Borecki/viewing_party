@@ -134,7 +134,6 @@ RSpec.describe 'user dashboard page' do
 
           within "#events" do
             within "#event-#{my_viewing_party.id}" do
-              # TODO: Add test to confirm link redirects to movie page
               expect(page).to have_link(movie.title)
               expect(page).to have_content(my_viewing_party.date_time.strftime('%A, %B %-d, %Y'))
               expect(page).to have_content(my_viewing_party.date_time.strftime('%l:%M %p'))
@@ -143,10 +142,10 @@ RSpec.describe 'user dashboard page' do
               my_viewing_party.users.each do |guest|
                 expect(page).to have_content(guest.email)
               end
-              #
-              # click_link my_viewing_party.movie_id.to_s
-              #
-              # expect(page).to have_current_path("/movies/#{my_viewing_party.movie_id}")
+
+              click_link my_viewing_party.movie_title.to_s
+
+              expect(page).to have_current_path("/movies/#{my_viewing_party.movie_id}")
             end
           end
 
@@ -154,7 +153,6 @@ RSpec.describe 'user dashboard page' do
 
           within "#events" do
             within "#event-#{their_viewing_party.id}" do
-              # TODO: Add test to confirm link redirects to movie page
               expect(page).to have_link(movie.title)
               expect(page).to have_content(their_viewing_party.date_time.strftime('%A, %B %-d, %Y'))
               expect(page).to have_content(their_viewing_party.date_time.strftime('%l:%M %p'))
@@ -164,10 +162,10 @@ RSpec.describe 'user dashboard page' do
                 # TODO: Make current_user's name bold in invited list
                 expect(page).to have_content(guest.email)
               end
-              #
-              # click_link their_viewing_party.movie_id.to_s
-              #
-              # expect(page).to have_current_path("/movies/#{their_viewing_party.movie_id}")
+
+              click_link their_viewing_party.movie_title.to_s
+
+              expect(page).to have_current_path("/movies/#{their_viewing_party.movie_id}")
             end
           end
         end

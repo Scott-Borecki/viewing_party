@@ -38,7 +38,7 @@ RSpec.describe 'welcome index page' do
     expect(page).to have_current_path(root_path)
     expect(page).to_not have_content("Welcome, #{user.email}!")
 
-    within '#failure' do
+    within '#danger' do
       expect(page).to have_content('Something went horribly wrong!')
     end
   end
@@ -53,7 +53,7 @@ RSpec.describe 'welcome index page' do
     expect(page).to have_current_path(root_path)
     expect(page).to_not have_content("Welcome, #{user.email}!")
 
-    within '#failure' do
+    within '#danger' do
       expect(page).to have_content('Something went horribly wrong!')
     end
   end
@@ -69,7 +69,7 @@ RSpec.describe 'welcome index page' do
     expect(page).to have_current_path(root_path)
     expect(page).to_not have_content("Welcome, #{user.email}!")
 
-    within '#failure' do
+    within '#danger' do
       expect(page).to have_content('Something went horribly wrong!')
     end
   end
@@ -83,7 +83,7 @@ RSpec.describe 'welcome index page' do
     expect(page).to have_current_path(root_path)
     expect(page).to_not have_content("Welcome, funbucket13!")
 
-    within '#failure' do
+    within '#danger' do
       expect(page).to have_content('Something went horribly wrong!')
     end
   end

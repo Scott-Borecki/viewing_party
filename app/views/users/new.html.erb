@@ -1,12 +1,26 @@
-<%= form_with model: @user, url:'/registration', local: true do |form| %>
-  <%= form.label :email, 'Email:' %>
-  <%= form.text_field :email %>
+<h1 class='center'>Register New User</h1>
 
-  <%= form.label :password, 'Password:' %>
-  <%= form.password_field :password %>
+<div class="container">
+  <%= form_with model: @user, url:'/registration', local: true do |form| %>
+    <table>
+      <tr>
+        <th><%= form.label :email, 'Email:' %></th>
+        <td><%= form.text_field :email %></td>
+      </tr>
 
-  <%= form.label :password_confirmation, 'Password Confirmation:' %>
-  <%= form.password_field :password_confirmation %>
+      <tr>
+        <th><%= form.label :password, 'Password:' %></th>
+        <td><%= form.password_field :password %></td>
+      </tr>
 
-  <%= form.submit 'Register' %>
-<% end %>
+      <tr>
+        <th><%= form.label :password_confirmation, 'Password Confirmation:' %></th>
+        <td><%= form.password_field :password_confirmation %></td>
+      </tr>
+
+      <tr>
+        <td colspan='2'><%= form.submit 'Register', class: 'btn btn-warning' %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

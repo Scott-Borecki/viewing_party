@@ -47,7 +47,7 @@ RSpec.describe 'User registration form' do
 
     expect(page).to have_current_path('/registration')
 
-    within '#failure' do
+    within '#danger' do
       expect(page).to have_content('Something went horribly wrong!')
     end
   end
@@ -72,7 +72,7 @@ RSpec.describe 'User registration form' do
 
     expect(page).to have_current_path('/registration')
 
-    within '#failure' do
+    within '#danger' do
       expect(page).to have_content('Something went horribly wrong!')
     end
   end
@@ -99,7 +99,7 @@ RSpec.describe 'User registration form' do
 
     expect(page).to have_current_path('/registration')
 
-    within '#failure' do
+    within '#danger' do
       expect(page).to have_content('Something went horribly wrong!')
     end
   end

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>ViewingParty</title>
     <%= csrf_meta_tags %>
@@ -11,7 +11,7 @@
   <body>
     <main>
       <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, class: name, id: name %>
+        <%= content_tag :div, msg, class: "alert alert-#{name}", id: name %>
       <% end %>
       <%= yield %>
     </main>
@@ -20,8 +20,7 @@
       <div>
         <p>
           Thank you to <a href="https://www.themoviedb.org/about/logos-attribution">The MovieDB</a> for providing the movie data that is used in this application.
-        </p>
-        <p>
+          <br>
           Further citation information regarding the movie data used in this project can be found <a href="http://files.grouplens.org/datasets/movielens/ml-latest-small-README.html">here.</a>
         </p>
       </div>

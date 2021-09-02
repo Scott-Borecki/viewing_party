@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe Friendship, type: :model do
   describe 'validations' do
-    # EDGE CASE: Follower can only follow Followee once
+    it { should validate_presence_of(:followee_id) }
+    it { should validate_presence_of(:follower_id) }
+    it { should validate_uniqueness_of(:followee_id).scoped_to(:follower_id) }
   end
 
   describe 'relationships' do

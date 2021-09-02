@@ -1,8 +1,9 @@
-<%= button_to 'Find Top Rated Movies', '/movies', method: :get %>
-<%= button_to 'Find Trending Movies', '/movies', method: :get, params: { trending: true } %>
+<%= button_to 'Find Top Rated Movies', '/movies', method: :get, class: 'btn btn-warning' %><br>
+
+<%= button_to 'Find Trending Movies', '/movies', method: :get, params: { trending: true }, class: 'btn btn-warning' %><br>
 
 <%= form_with url: '/movies', method: :get, local: true do |form| %>
   <%= form.text_field :search %>
 
-  <%= form.submit 'Find Movies' %>
+  <%= form.submit 'Find Movies', class: 'btn btn-warning' %>
 <% end %>

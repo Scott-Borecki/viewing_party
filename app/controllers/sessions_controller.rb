@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Welcome, #{user.email}!"
       redirect_to dashboard_path
     else
-      flash[:failure] = 'Something went horribly wrong!'
+      flash[:danger] = 'Something went horribly wrong!'
       redirect_to root_path
     end
   end

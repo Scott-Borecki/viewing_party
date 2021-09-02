@@ -1,22 +1,39 @@
+<h1 class='center'>Create a New Viewing Party</h1>
+
 <%= form_with url: "/movies/#{@movie.id}/events", local: true do |form| %>
-  <%= form.label :movie_title_label, 'Movie Title' %>
-  <%= form.label :movie_title, @movie.title %><br>
+  <table>
+    <tr>
+      <th><%= form.label :movie_title_label, 'Movie Title' %></th>
+      <th><%= form.label :movie_title, @movie.title %></th>
+    </tr>
 
-  <%= form.label :duration, 'Duration of Party' %>
-  <%= form.text_field :duration, value: @movie.runtime %><br>
+    <tr>
+      <th><%= form.label :duration, 'Duration of Party (minutes)' %></th>
+      <td><%= form.text_field :duration, value: @movie.runtime %></td>
+    </tr>
 
-  <%= form.label :when, 'Day' %>
-  <%= form.date_select :when, prefix: :date %><br>
+    <tr>
+      <th><%= form.label :when, 'Day' %></th>
+      <td><%= form.date_select :when, prefix: :date %></td>
+    </tr>
 
-  <%= form.label :start_time, 'Start Time' %>
-  <%= form.time_select :start_time, prefix: :time %><br>
+    <tr>
+      <th><%= form.label :start_time, 'Start Time' %></th>
+      <td><%= form.time_select :start_time, prefix: :time %></td>
+    </tr>
 
-  <%= form.label :include, 'Include' %>
-  <% current_user.followees.each do |followee| %>
-    <%= form.check_box :"invitations[#{followee.email}]" %>
-    <%= form.label :"invitations[#{followee.email}]", followee.email %>
-  <% end %>
-  <br>
+    <tr>
+      <th><%= form.label :include, 'Include' %></th>
+      <td>
+        <% current_user.followees.each do |followee| %>
+          <%= form.check_box :"invitations[#{followee.email}]" %>
+          <%= form.label :"invitations[#{followee.email}]", followee.email %><br>
+        <% end %>
+      </td>
+    </tr>
 
-  <%= form.submit 'Create Viewing Party' %>
+    <tr>
+      <td colspan='2'><%= form.submit 'Create Viewing Party', class: 'btn btn-warning' %></td>
+    </tr>
+  </table>
 <% end %>
